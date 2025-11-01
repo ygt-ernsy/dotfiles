@@ -1,0 +1,11 @@
+# Zsh cache and history
+.zsh_history
+.zcompdump*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Any local-only or sensitive files
+local.sh
+.env

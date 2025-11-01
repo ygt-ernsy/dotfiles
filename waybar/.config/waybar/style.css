@@ -1,0 +1,69 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: rgba(20, 20, 20, 0.8);
+    color: #b0b0b0;
+}
+
+#waybar.hidden {
+    opacity: 0.2;
+}
+
+#custom-power,
+#custom-arch_logo,
+#hyprland-workspaces,
+#idle_inhibitor,
+#clock,
+#pulseaudio,
+#tray,
+#battery {
+    padding: 0 8px;
+    margin: 0 2px;
+    transition: background-color 0.3s;
+}
+
+#hyprland-workspaces button {
+    padding: 0 5px;
+    color: #888888;
+    background-color: transparent;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+
+#hyprland-workspaces button.active {
+    color: #ffffff;
+}
+
+#custom-arch_logo:hover,
+#hyprland-workspaces button:hover,
+#idle_inhibitor:hover,
+#pulseaudio:hover,
+#tray:hover,
+#battery:hover {
+    background-color: rgba(40, 40, 40, 0.5);
+}
+
+#clock {
+    font-weight: bold;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+#custom-gpu_mode {
+  padding: 0 8px;
+  color: #7dd3fc; /* light blue */
+}
+
+#custom-power {
+    padding: 0 8px;
+    color: #7dd3fc;
+}
+#custom-power:hover {
+    background-color: rgba(40, 40, 40, 0.5);
+    color: #ffffff;
+}

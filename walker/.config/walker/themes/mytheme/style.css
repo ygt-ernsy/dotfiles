@@ -1,0 +1,213 @@
+/* --- WhiteSur Dark Inspired Colors --- */
+@define-color window_bg_color rgba(30, 30, 30, 0.85); /* Dark semi-transparent background */
+@define-color input_bg_color rgba(50, 50, 50, 0.7); /* Slightly lighter input */
+@define-color accent_color #3478f6; /* macOS-like blue accent */
+@define-color selected_bg_color alpha(@accent_color, 0.4); /* Transparent blue for selection */
+@define-color hover_bg_color rgba(70, 70, 70, 0.5); /* Subtle hover background */
+@define-color theme_fg_color #eaeaea; /* Light text */
+@define-color secondary_fg_color alpha(@theme_fg_color, 0.6); /* Dimmer text for subtext/hints */
+@define-color border_color alpha(@theme_fg_color, 0.15); /* Very subtle border */
+@define-color error_bg_color #eb5757; /* Error background */
+@define-color error_fg_color #ffffff; /* Error text */
+
+/* --- General Reset & Font (Optional) --- */
+* {
+  all: unset;
+  /* Uncomment the line below if you have a suitable font like SF Pro, Cantarell, Noto Sans */
+  /* font-family: "SF Pro Display", Cantarell, Noto Sans, sans-serif; */
+}
+
+/* --- Icons --- */
+.normal-icons {
+  -gtk-icon-size: 16px;
+}
+
+.large-icons {
+  -gtk-icon-size: 32px;
+}
+
+/* --- Scrollbar (Keep hidden) --- */
+scrollbar {
+  opacity: 0;
+}
+
+/* --- Main Window Wrapper --- */
+.box-wrapper {
+  background-color: @window_bg_color;
+  padding: 15px; /* Slightly reduced padding */
+  border-radius: 16px; /* More pronounced rounding */
+  border: 1px solid @border_color;
+  /* Optional: Add a subtle shadow if desired, WhiteSur often keeps it minimal */
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); */
+}
+
+/* --- Text Hints --- */
+.preview-box,
+.elephant-hint,
+.placeholder {
+  color: @secondary_fg_color;
+  font-size: 13px;
+}
+
+/* --- Search Input --- */
+.input {
+  background-color: @input_bg_color;
+  color: @theme_fg_color;
+  caret-color: @accent_color;
+  border-radius: 10px; /* Consistent rounding */
+  padding: 10px 14px;
+  margin: 5px 5px 10px 5px; /* Adjust margin */
+  border: 1px solid transparent; /* Hide border until focus */
+}
+
+.input:focus,
+.input:active {
+  border: 1px solid alpha(@accent_color, 0.5); /* Subtle focus border */
+  box-shadow: none; /* Remove default focus glow */
+}
+
+.input placeholder {
+  color: @secondary_fg_color;
+  opacity: 0.7;
+}
+
+/* --- List Items --- */
+.list {
+  color: @theme_fg_color;
+  padding: 0 5px; /* Padding for the list container */
+}
+
+.item-box {
+  border-radius: 8px; /* Slightly less rounded than input */
+  padding: 8px 10px;
+  margin-bottom: 2px; /* Small gap between items */
+}
+
+/* Hover effect */
+child:hover .item-box {
+  background-color: @hover_bg_color;
+}
+
+/* Selected item effect */
+child:selected .item-box {
+  background-color: @selected_bg_color;
+  color: @theme_fg_color; /* Keep text light on blue background */
+}
+
+/* Quick activation highlight */
+.item-quick-activation {
+  background-color: alpha(@accent_color, 0.15); /* Very subtle blue hint */
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* --- Item Text Styling --- */
+.item-text-box {
+  /* Adjust spacing if needed */
+}
+
+.item-subtext {
+  font-size: 12px;
+  color: @secondary_fg_color;
+  opacity: 1; /* Control via color alpha instead */
+}
+
+.providerlist .item-subtext {
+  font-size: unset;
+  opacity: 1;
+  color: @secondary_fg_color;
+}
+
+.item-image-text {
+  font-size: 28px;
+}
+
+/* --- Preview Area --- */
+.preview {
+  background-color: @input_bg_color; /* Use input background for consistency */
+  border: 1px solid @border_color;
+  padding: 15px;
+  border-radius: 10px;
+  color: @theme_fg_color;
+  margin-top: 10px;
+}
+
+.preview .large-icons {
+  -gtk-icon-size: 64px;
+}
+
+/* --- Specific Provider Styles --- */
+.calc .item-text {
+  font-size: 24px;
+}
+
+.symbols .item-image {
+  font-size: 24px;
+}
+
+.todo.done .item-text-box {
+  opacity: 0.4; /* Keep fading for done tasks */
+  text-decoration-line: line-through;
+}
+
+.todo.urgent {
+  font-weight: bold;
+  color: @error_bg_color; /* Make urgent stand out */
+}
+
+.todo.active {
+  font-weight: bold;
+}
+
+.bluetooth.disconnected {
+  opacity: 0.5;
+}
+
+
+/* --- Keybind Hints --- */
+.keybinds-wrapper {
+  border-top: 1px solid @border_color;
+  font-size: 11px; /* Smaller hints */
+  opacity: 1;
+  color: @secondary_fg_color;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.keybinds {
+  /* Spacing handled by GTK */
+}
+
+.keybind {
+  margin: 0 6px; /* Space out keybinds */
+}
+
+.keybind-bind {
+  font-weight: 600; /* Semi-bold */
+  text-transform: none; /* Use default case */
+  background-color: rgba(70, 70, 70, 0.6); /* Darker background for keys */
+  color: @theme_fg_color;
+  padding: 1px 4px;
+  border-radius: 4px;
+  border: 1px solid alpha(black, 0.3);
+}
+
+.keybind-label {
+  margin-left: 4px;
+}
+
+/* --- Error Message --- */
+.error {
+  padding: 10px;
+  background: @error_bg_color;
+  color: @error_fg_color;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+/* --- Current Input Highlight --- */
+:not(.calc).current {
+  /* Maybe remove italic or use a different indicator */
+  /* font-style: italic; */
+}
+

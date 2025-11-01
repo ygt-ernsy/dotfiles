@@ -1,0 +1,80 @@
+/*
+ * Walker Theme: Spotlight
+ *
+ * How to use:
+ * 1. Create folder: ~/.config/walker/themes/spotlight/
+ * 2. Save this as: ~/.config/walker/themes/spotlight/style.css
+ * 3. Set in ~/.config/walker/config.toml: theme = "spotlight"
+ */
+
+/* 1. Define Spotlight-like Colors */
+@define-color window_bg_color rgba(40, 40, 40, 0.85); /* Dark, semi-transparent background */
+@define-color input_bg_color rgba(70, 70, 70, 0.8);  /* Slightly lighter input background */
+@define-color accent_bg_color #1d71f3;              /* Spotlight's blue selection color */
+@define-color theme_fg_color #ffffff;                 /* White text */
+@define-color selection_fg_color #ffffff;             /* Text color when selected */
+@define-color secondary_fg_color rgba(255, 255, 255, 0.7); /* Dimmed text for subtext/placeholders */
+@define-color border_color rgba(255, 255, 255, 0.1); /* Subtle border for definition */
+
+
+/* 2. Reset all styles */
+* {
+ all: unset;
+}
+
+/* 3. Main Window Container */
+.box-wrapper {
+ background: @window_bg_color;
+ padding: 12px;
+ border-radius: 16px; /* Rounded corners */
+ border: 1px solid @border_color;
+ /* For a true blur effect, you must enable compositor blur (e.g., in KDE or sway).
+    This CSS just provides transparency. */
+}
+
+/* 4. Search Input Field */
+.input {
+ background: @input_bg_color;
+ color: @theme_fg_color;
+ caret-color: @theme_fg_color;
+ padding: 12px;
+ border-radius: 10px;
+ margin-bottom: 8px; /* Space between input and results */
+ font-size: 1.4em; /* Larger font in the search bar */
+}
+
+.input placeholder {
+ color: @secondary_fg_color;
+ opacity: 1;
+}
+
+/* 5. Results List */
+.list {
+ color: @theme_fg_color;
+}
+
+.item-box {
+ border-radius: 8px;
+ padding: 8px 12px;
+}
+
+/* 6. Selected Result Item */
+child:selected .item-box {
+ background: @accent_bg_color;
+ color: @selection_fg_color;
+}
+
+/* 7. Item Text (Main) */
+.item-text {
+ font-size: 1.1em;
+}
+
+/* 8. Item Subtext (Secondary) */
+.item-subtext {
+ font-size: 0.9em;
+ color: @secondary_fg_color;
+ opacity: 1;
+}
+
+/* 9. Subtext on a selected item */
+child:selected .item-subtext{}
