@@ -40,7 +40,7 @@
  padding: 12px;
  border-radius: 10px;
  margin-bottom: 8px; /* Space between input and results */
- font-size: 1.4em; /* Larger font in the search bar */
+ font-size: 1.2em; /* Larger font in the search bar */
 }
 
 .input placeholder {
