@@ -1,6 +1,7 @@
 # Zsh cache and history
 .zsh_history
 .zcompdump*
+.zshrc.secrets
 
 # OS-specific
 .DS_Store

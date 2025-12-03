@@ -130,9 +130,13 @@ source /usr/share/fzf/completion.zsh
 export HYPRSHOT_DIR="$HOME/screenshots"
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-
 # Created by `pipx` on 2025-08-16 15:37:07
 export PATH="$PATH:/home/yigiterensoy/.local/bin"
+
+# Load secrets if the file exists
+if [ -f "$HOME/.zshrc.secrets" ]; then
+    source "$HOME/.zshrc.secrets"
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
