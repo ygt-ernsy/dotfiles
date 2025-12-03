@@ -130,5 +130,11 @@ source /usr/share/fzf/completion.zsh
 export HYPRSHOT_DIR="$HOME/screenshots"
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+export AVANTE_OPENROUTER_API_KEY="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"
+
 # Created by `pipx` on 2025-08-16 15:37:07
 export PATH="$PATH:/home/yigiterensoy/.local/bin"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
