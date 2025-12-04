@@ -1,0 +1,39 @@
+-- return {
+--   'nvim-neo-tree/neo-tree.nvim',
+--   branch = 'v3.x',
+--   dependencies = {
+--     'nvim-lua/plenary.nvim',
+--     'MunifTanjim/nui.nvim',
+--     'nvim-tree/nvim-web-devicons', -- optional, but recommended
+--   },
+--   -- 1. REMOVED 'lazy = false'.
+--   -- 2. ADDED this 'keys' table.
+--   --    This tells lazy.nvim to load the plugin the first time you press '\'
+--   keys = {
+--     {
+--       '\\',
+--       function()
+--         -- This command will toggle the neo-tree window and
+--         -- automatically "reveal" the file you are currently editing
+--         require('neo-tree.command').execute { toggle = true, reveal = true }
+--       end,
+--       desc = 'NeoTree (reveal/toggle)',
+--     },
+--   },
+--   -- 3. ADDED this 'opts' table to configure neo-tree
+--   -- ... (keys table is above this)
+--   opts = {
+--     filesystem = {
+--       window = {
+--         mappings = {
+--           ['\\'] = 'close_window',
+--         },
+--       },
+--     },
+--     -- This is the part you need to change:
+--     window = {
+--       position = 'left', -- Was 'float', now 'right'
+--       width = 40, -- You can adjust the width as needed
+--     },
+--   },
+-- }
