@@ -9,7 +9,8 @@ return {
     require('lualine').setup {
       options = {
         -- Match your colorscheme
-        theme = 'tokyonight',
+        -- theme = 'tokyonight',
+        theme = 'vague',
         icons_enabled = true,
         -- Use these for a cleaner look
         component_separators = '|',

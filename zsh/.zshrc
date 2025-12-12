@@ -120,6 +120,8 @@ alias sybau="yay -Syu" # sudo pacman -Syu
 alias kys="shutdown now" # sudo pacman -Syu
 eval "$(zoxide init zsh)"
 
+alias v="nvim"
+alias dprune="docker system prune -a --volumes"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /home/yigiterensoy/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -138,6 +140,4 @@ if [ -f "$HOME/.zshrc.secrets" ]; then
     source "$HOME/.zshrc.secrets"
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(fnm env --use-on-cd)"

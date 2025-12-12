@@ -1,0 +1,101 @@
+/*
+ * Walker Theme: Dark Card (Based on reference image)
+ */
+
+/* --- 1. Color Palette --- */
+/* The window background is nearly black, slightly transparent */
+@define-color window_bg_color rgba(30, 30, 34, 0.96);
+
+/* The search input is a lighter dark-gray */
+@define-color input_bg_color rgba(60, 62, 70, 0.5);
+
+/* The selection color is a muted slate/steel blue, not bright blue */
+@define-color selection_bg_color #4b5563; 
+
+@define-color theme_fg_color #ffffff;           /* Main text */
+@define-color subtext_fg_color #9ca3af;         /* Description text */
+@define-color placeholder_fg_color rgba(255, 255, 255, 0.3);
+
+
+/* --- 2. Global Reset --- */
+* {
+  all: unset;
+}
+
+/* --- 3. Main Window --- */
+#window {
+    background: transparent;
+}
+
+.box-wrapper {
+  background: @window_bg_color;
+  padding: 20px; /* Generous padding like the image */
+  border-radius: 24px; /* Large rounded corners for the container */
+  
+  /* Optional: Adds the subtle shadow seen in the image */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* --- 4. Search Input (The Pill) --- */
+.input {
+  background: @input_bg_color;
+  color: @theme_fg_color;
+  caret-color: @theme_fg_color;
+  
+  /* Pill shape - fully rounded corners */
+  border-radius: 99px; 
+  
+  padding: 12px 20px;
+  margin-bottom: 20px; /* Space between search and list */
+  font-size: 1.1em;
+}
+
+.input placeholder {
+  color: @placeholder_fg_color;
+}
+
+/* --- 5. The List --- */
+.list {
+  background: transparent;
+}
+
+/* --- 6. Individual Items --- */
+.item-box {
+  padding: 10px 16px;
+  border-radius: 12px; /* Slightly less rounded than the window */
+  margin-bottom: 4px;  /* Tiny space between items */
+  transition: background 0.2s; /* Smooth hover/select effect */
+}
+
+/* State: Selected Item */
+child:selected .item-box {
+  background: @selection_bg_color;
+}
+
+/* --- 7. Text Styling --- */
+
+/* The main application name */
+.item-text {
+  color: @theme_fg_color;
+  font-weight: 600; /* Bold text */
+  font-size: 1em;
+}
+
+/* The description/subtext */
+.item-subtext {
+  color: @subtext_fg_color;
+  font-size: 0.85em;
+  margin-top: 2px;
+}
+
+/* Ensure selected text stays white */
+child:selected .item-text,
+child:selected .item-subtext {
+  color: #ffffff;
+}
+
+/* --- 8. Icons --- */
+.icon {
+  margin-right: 15px; /* Space between icon and text */
+  -gtk-icon-transform: scale(1.0);
+}

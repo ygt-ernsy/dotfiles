@@ -2,8 +2,10 @@
 # to disable the annoying drrrrpoplet sound
 enable_audio_bell no
 # BEGIN_KITTY_THEME
-# Tokyo Night Moon
+# Tokyo Night
 include current-theme.conf
+# Phocus
+# include phocus.conf
 # END_KITTY_THEME
 
 #: Fonts {{{
@@ -12,6 +14,7 @@ include current-theme.conf
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
+font_family JetBrainsMono Nerd Font
 # font_family      monospace
 # bold_font        auto
 # italic_font      auto
@@ -897,7 +900,7 @@ remember_window_size  no
 #: that setting a non-zero window_margin_width overrides this and
 #: causes all borders to be drawn.
 
-# window_margin_width 0
+window_margin_width 5
 
 #: The window margin (in pts) (blank area outside the border). A
 #: single value sets all four sides. Two values set the vertical and
@@ -1224,7 +1227,7 @@ window_padding_width 2
 #: The foreground and background colors.
 
 background_opacity 1.0
-# background_opacity 0.8
+# background_opacity 0.6
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if

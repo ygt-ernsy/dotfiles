@@ -310,6 +310,9 @@ require('lazy').setup({
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
+
+      -- The shape of the box - classic, modern or helix
+      preset = 'modern',
       delay = 0,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
@@ -921,7 +924,22 @@ require('lazy').setup({
       }
 
       -- Load the colorscheme here.
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-night'
+    end,
+  },
+
+  {
+    'vague-theme/vague.nvim',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other plugins
+    config = function()
+      -- NOTE: you do not need to call setup if you don't want to.
+      require('vague').setup {
+        -- optional configuration here
+        sidebars = 'transparent',
+        floats = 'transparent',
+      }
+      vim.cmd.colorscheme 'vague'
     end,
   },
 
@@ -1070,3 +1088,5 @@ LineNumberColors()
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+-- Custom Phocus theme
