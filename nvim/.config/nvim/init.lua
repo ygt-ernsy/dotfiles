@@ -682,7 +682,17 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                diagnosticSeverityOverrides = {
+                  reportWildcardImportFromLibrary = 'none',
+                },
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -1078,15 +1088,42 @@ require('lazy').setup({
 -- end
 -- Sets colors to line numbers Above, Current and Below  in this order
 
-function LineNumberColors()
-  vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#51B3EC', bold = true })
-  vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
-  vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#FB508F', bold = true })
+-- function LineNumberColors()
+--   vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#51B3EC', bold = true })
+--   vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
+--   vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#FB508F', bold = true })
+-- end
+-- LineNumberColors()
+
+local function UpdateLineNumberColors()
+  -- 1. Get the color attributes from existing theme groups
+  -- 'Directory' is usually Blue, 'Statement' is usually Pink/Red/Purple
+  local color_above = vim.api.nvim_get_hl(0, { name = 'Directory' })
+  local color_below = vim.api.nvim_get_hl(0, { name = 'Statement' })
+
+  -- 'CursorLineNr' is the standard group for the current line number
+  local color_current = vim.api.nvim_get_hl(0, { name = 'CursorLineNr' })
+
+  -- 2. Apply these colors to your relative line numbers
+  -- We use .fg to grab the foreground color integer
+  vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = color_above.fg, bold = true })
+  vim.api.nvim_set_hl(0, 'LineNr', { fg = color_current.fg, bold = true })
+  vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = color_below.fg, bold = true })
 end
 
-LineNumberColors()
+-- 3. Create an Autocommand
+-- This ensures the function runs every time you load or change a color scheme
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = UpdateLineNumberColors,
+})
+
+-- Run it once immediately in case the theme is already loaded
+UpdateLineNumberColors()
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
--- Custom Phocus theme
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

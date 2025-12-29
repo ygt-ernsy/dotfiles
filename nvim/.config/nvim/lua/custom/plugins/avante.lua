@@ -4,7 +4,11 @@ return {
   event = 'VeryLazy',
   version = false, -- Never set this value to "*"! Never!
   opts = {
+
     provider = 'openrouter',
+
+    auto_suggestions_provider = 'openrouter',
+
     providers = {
       openrouter = {
         __inherited_from = 'openai',
