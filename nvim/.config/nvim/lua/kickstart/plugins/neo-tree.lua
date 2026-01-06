@@ -15,10 +15,19 @@ return {
   },
   opts = {
     filesystem = {
+      use_libuv_file_watcher = true, -- Auto-refresh on file system changes
+      follow_current_file = {
+        enabled = true, -- Focus the file you're editing
+      },
       window = {
         mappings = {
           ['\\'] = 'close_window',
         },
+      },
+    },
+    git_status = {
+      follow_current_file = {
+        enabled = true,
       },
     },
   },

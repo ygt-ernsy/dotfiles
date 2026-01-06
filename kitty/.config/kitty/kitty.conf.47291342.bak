@@ -2655,4 +2655,3 @@ background_opacity 1.0
 #: }}}
 
 #: }}}
-map shift+enter send_text all \e\r
