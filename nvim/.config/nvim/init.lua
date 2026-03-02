@@ -93,6 +93,11 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Performance optimizations
+vim.o.lazyredraw = false -- Keep false for smooth scrolling in modern Neovim
+vim.o.ttyfast = true
+vim.o.regexpengine = 1 -- Use old regexp engine (faster for most patterns)
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -963,6 +968,21 @@ require('lazy').setup({
       vim.cmd.colorscheme 'vague'
     end,
   },
+
+  -- {
+  --   'rose-pine/neovim',
+  --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other plugins
+  --   config = function()
+  --     -- NOTE: you do not need to call setup if you don't want to.
+  --     require('rose-pine').setup {
+  --       -- optional configuration here
+  --       sidebars = 'transparent',
+  --       floats = 'transparent',
+  --     }
+  --     vim.cmd.colorscheme 'rose-pine'
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },

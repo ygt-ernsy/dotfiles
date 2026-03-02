@@ -2,10 +2,8 @@
 # to disable the annoying drrrrpoplet sound
 enable_audio_bell no
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Rosé Pine
 include current-theme.conf
-# Phocus
-# include phocus.conf
 # END_KITTY_THEME
 
 #: Fonts {{{
@@ -356,7 +354,7 @@ font_family JetBrainsMono Nerd Font
 
 #: Scrollback {{{
 
-# scrollback_lines 2000
+scrollback_lines 2000
 
 #: Number of lines of history to keep in memory for scrolling back.
 #: Memory is allocated on demand. Negative numbers are (effectively)
@@ -1227,7 +1225,7 @@ window_padding_width 2
 #: The foreground and background colors.
 
 background_opacity 1.0
-# background_opacity 0.6
+# background_opacity 0.4
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -1253,7 +1251,7 @@ background_opacity 1.0
 #: original config.
 
 
-# background_blur 0
+background_blur 1
 
 #: Set to a positive value to enable background blur (blurring of the
 #: visuals behind a transparent window) on platforms that support it.
@@ -1301,7 +1299,7 @@ background_opacity 1.0
 
 #:     transparent_background_colors red@0.5 #00ff00@0.3
 
-# dynamic_background_opacity no
+dynamic_background_opacity yes
 
 #: Allow changing of the background_opacity dynamically, using either
 #: keyboard shortcuts (increase_background_opacity and
@@ -2657,3 +2655,4 @@ background_opacity 1.0
 #: }}}
 
 #: }}}
+map shift+enter send_text all \e\r

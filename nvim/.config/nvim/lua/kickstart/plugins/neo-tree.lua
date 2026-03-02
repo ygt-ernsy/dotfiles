@@ -31,4 +31,18 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require('neo-tree').setup(opts)
+    -- Fix thick separator on vague theme by removing background color
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      pattern = 'vague',
+      callback = function()
+        vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', { fg = vim.api.nvim_get_hl(0, { name = 'WinSeparator' }).fg, bg = 'NONE' })
+      end,
+    })
+    -- Apply immediately if vague is already loaded
+    if vim.g.colors_name == 'vague' then
+      vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', { fg = vim.api.nvim_get_hl(0, { name = 'WinSeparator' }).fg, bg = 'NONE' })
+    end
+  end,
 }

@@ -11,6 +11,7 @@ return {
         -- Match your colorscheme
         -- theme = 'tokyonight',
         theme = 'vague',
+        -- theme = 'rose-pine',
         icons_enabled = true,
         -- Use these for a cleaner look
         component_separators = '|',
