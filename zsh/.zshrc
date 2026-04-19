@@ -118,6 +118,7 @@ source $ZSH/oh-my-zsh.sh
 alias yeet="yay -Rcs"
 alias sybau="yay -Syu" # sudo pacman -Syu
 alias kys="shutdown now" # sudo pacman -Syu
+alias tmux="tmux a || tmux"
 eval "$(zoxide init zsh)"
 
 alias v="nvim"
