@@ -10,3 +10,6 @@ Thumbs.db
 # Any local-only or sensitive files
 local.sh
 .env
+
+# dms 
+dms/
