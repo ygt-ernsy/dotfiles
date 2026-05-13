@@ -119,23 +119,6 @@ hl.config({
 		disable_hyprland_logo = false,
 	},
 
-	input = {
-		kb_layout = "us,tr",
-		kb_variant = "",
-		kb_model = "",
-		kb_rules = "",
-		kb_options = "grp:ctrl_space_toggle,caps:escape",
-		repeat_rate = 50,
-		repeat_delay = 300,
-		follow_mouse = 1,
-		accel_profile = "flat",
-		sensitivity = 0.0,
-		touchpad = {
-			scroll_factor = 0.2,
-			natural_scroll = true,
-		},
-	},
-
 	xwayland = {
 		force_zero_scaling = true,
 	},
@@ -160,6 +143,27 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 3, bezier = "default
 ---------------
 ---- INPUT ----
 ---------------
+hl.config({
+	input = {
+		kb_layout = "us,tr",
+		kb_variant = "",
+		kb_model = "",
+		kb_rules = "",
+		kb_options = "grp:ctrl_space_toggle,caps:escape",
+
+		repeat_rate = 50,
+		repeat_delay = 300,
+
+		follow_mouse = 1,
+		accel_profile = "flat",
+		sensitivity = 0.0,
+		touchpad = {
+			scroll_factor = 0.2,
+			natural_scroll = true,
+		},
+	},
+})
+
 hl.device({
 	name = "logitech-gaming-mouse-g402",
 	sensitivity = 0.0,
@@ -170,6 +174,12 @@ hl.device({
 	name = "syna32e3:00-06cb:cee7-touchpad",
 	sensitivity = 0.5,
 	accel_profile = "flat",
+})
+
+hl.gesture({
+	fingers = 3,
+	direction = "horizontal",
+	action = "workspace",
 })
 
 ---------------------
