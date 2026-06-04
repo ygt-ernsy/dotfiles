@@ -1,3 +1,5 @@
+@import url("../current/theme/waybar.css");
+
 * {
     border: none;
     border-radius: 0;
