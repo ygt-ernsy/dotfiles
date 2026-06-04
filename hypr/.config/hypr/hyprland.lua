@@ -230,6 +230,8 @@ hl.bind("SUPER + period", hs.dsp.workspace.swap_monitors({ monitor1 = "current",
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
+-- theme picker
+hl.bind("SUPER + SHIFT + space", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/scripts/theme-rofi"))
 ------------------------
 ---- RESIZE SUBMAP ----
 ------------------------
