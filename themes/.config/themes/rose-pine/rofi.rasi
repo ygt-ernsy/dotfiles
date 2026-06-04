@@ -1,0 +1,95 @@
+/* CUSTOM DARK THEME BASED ON MACOS SPOTLIGHT / KRUNNER */
+@import "~/.config/themes/rose-pine/colors.rasi"
+
+* {
+    font:   "Montserrat 12";
+
+    /* Pulling in colors from colors.rasi */
+    bg0:    @background;           /* Main window background */
+    bg1:    @color0;               /* Separator line color */
+    bg2:    @selection-background; /* Selection highlight */
+
+    fg0:    @foreground;           /* Default text */
+    fg1:    @selection-foreground; /* Highlighted text */
+    fg2:    @color8;               /* Muted text for placeholder */
+
+    background-color:   transparent;
+    text-color:         @fg0;
+
+    margin:     0;
+    padding:    0;
+    spacing:    0;
+}
+
+window {
+    background-color:   @bg0;
+    location:           center;
+    width:              800; /* Made wider to match the image proportions */
+    border-radius:      12px; /* Smoother, larger rounded corners */
+}
+
+inputbar {
+    font:       "Montserrat 14";
+    padding:    20px 24px;
+    spacing:    12px;
+    /* Removed icon-search to match the clean look of the image */
+    children:   [ entry ]; 
+}
+
+entry {
+    font:   inherit;
+    placeholder         : "Search for anything...";
+    placeholder-color   : @fg2;
+    vertical-align:     0.5;
+}
+
+message {
+    border:             2px 0 0;
+    border-color:       @bg1;
+    background-color:   @bg1;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    lines:      8;
+    columns:    1;
+
+    fixed-height:   false;
+    border:         1px 0 0;
+    border-color:   @bg1; /* Dark separator line under the search bar */
+    padding:        8px 0px 16px 0px; /* Added padding at the bottom */
+}
+
+element {
+    padding:            12px 24px; /* Taller rows to match the image spacing */
+    spacing:            16px;
+    background-color:   transparent;
+}
+
+element normal active {
+    text-color: @fg1;
+}
+
+element alternate active {
+    text-color: @fg1;
+}
+
+element selected normal, element selected active {
+    background-color:   @bg2;
+    text-color:         @fg1;
+    border-radius:      8px;
+    margin:             0px 12px; /* Keeps the selection box from touching the window edges */
+}
+
+element-icon {
+    size:           24px; /* Larger icons */
+    vertical-align: 0.5;
+}
+
+element-text {
+    text-color:     inherit;
+    vertical-align: 0.5;
+}
