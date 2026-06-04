@@ -181,4 +181,5 @@ configuration {
 */
 }
 
-@theme "/home/yigiterensoy/.local/share/rofi/themes/spotlight-dark.rasi"
+@theme "~/.config/current/theme/rofi.rasi"
+// @theme "/home/yigiterensoy/.local/share/rofi/themes/spotlight-dark.rasi"
