@@ -3,6 +3,11 @@
 .zcompdump*
 .zshrc.secrets
 
+# Vendored zsh plugin repos (installed separately, not tracked)
+zsh/.oh-my-zsh/
+zsh/.zsh-syntax-highlighting/
+zsh/.zsh/zsh-autosuggestions/
+
 # OS-specific
 .DS_Store
 Thumbs.db
