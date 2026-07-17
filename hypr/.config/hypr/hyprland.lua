@@ -52,8 +52,12 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function()
+	hl.exec_cmd(
+		"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
+	)
+	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
+	hl.exec_cmd("systemctl --user start hyprland-session.target") -- this pulls up graphical-session.target
 	hl.exec_cmd("lxqt-policykit-agent")
-	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("dms run")
 end)
@@ -80,8 +84,9 @@ hl.config({
 	},
 
 	decoration = {
-		rounding_power = 2.4,
-		rounding = 5,
+		-- rounding_power = 2.4,
+		-- rounding = 5,
+		rounding = 3,
 		blur = {
 			enabled = true,
 			xray = false,
@@ -289,7 +294,7 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"))
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"))
 
 hl.bind(mainMod .. " + SHIFT + f", hl.dsp.window.fullscreen({ mode = "maximized" }))
-hl.bind(mainMod .. " + t", hl.dsp.exec_cmd("kitty -e bpytop"))
+-- hl.bind(mainMod .. " + t", hl.dsp.exec_cmd("kitty -e bpytop"))
 hl.bind(mainMod .. " + o", hl.dsp.exec_cmd("kitty -e nvim " .. configFile))
 hl.bind(mainMod .. " + g", hs.dsp.grab_rogue_windows())
 
@@ -300,6 +305,60 @@ hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.move({ x = -50, y = 0, relative 
 hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.move({ x = 50, y = 0, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.move({ x = 0, y = -50, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ x = 0, y = 50, relative = true }), { repeating = true })
+
+---- Focus Mode ----
+hl.bind("SUPER + F1", function()
+	local focus_mode = (hl.get_config("animations.enabled") == false)
+
+	if focus_mode then
+		hl.exec_cmd("hyprctl reload")
+		return
+	end
+
+	hl.config({
+		general = {
+			gaps_in = 1,
+			gaps_out = 1,
+			border_size = 0,
+		},
+
+		animations = {
+			enabled = false, -- Disable animations
+		},
+
+		-- Disable blur, shadow and window rounding
+		decoration = {
+			shadow = { enabled = false },
+			blur = { enabled = false },
+			rounding = 0,
+		},
+	})
+end)
+
+---- Toggle Terminal ----
+local term_tag = "toggleterm"
+local term_space = "toggleterm"
+local function toggleterm()
+	local windows = hl.get_windows()
+
+	for _, w in pairs(windows) do
+		for _, t in pairs(w.tags) do
+			if string.match(t, "^" .. term_tag) then
+				hl.dispatch(hl.dsp.workspace.toggle_special(term_space))
+				return
+			end
+		end
+	end
+
+	hl.exec_cmd(terminal, {
+		float = true,
+		workspace = "special:" .. term_space,
+		size = { "(monitor_w*0.6)", "(monitor_h*0.6)" },
+		tag = term_tag,
+	})
+end
+
+hl.bind(mainMod .. " + t", toggleterm)
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
