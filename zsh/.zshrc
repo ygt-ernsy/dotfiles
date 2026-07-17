@@ -133,8 +133,12 @@ source /usr/share/fzf/completion.zsh
 export HYPRSHOT_DIR="$HOME/screenshots"
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# For the go directory
+export GOPATH=$HOME/.go
+
 # Created by `pipx` on 2025-08-16 15:37:07
 export PATH="$PATH:/home/yigiterensoy/.local/bin"
+export PATH="$HOME/.local/scripts:$PATH"
 
 # Load secrets if the file exists
 if [ -f "$HOME/.zshrc.secrets" ]; then
