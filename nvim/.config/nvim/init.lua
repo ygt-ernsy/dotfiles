@@ -1,89 +1,3 @@
---[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
-
-What is Kickstart?
-
-  Kickstart.nvim is *not* a distribution.
-
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
-
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
-
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-Kickstart Guide:
-
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
-
-    If you don't know what this means, type the following:
-      - <escape key>
-      - :
-      - Tutor
-      - <enter key>
-
-    (If you already know the Neovim basics, you can skip this step.)
-
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
-
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
-
-    This should be the first place you go to look when you're stuck or confused
-    with something. It's one of my favorite Neovim features.
-
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
-
-  I have left several `:help X` comments throughout the init.lua
-    These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
-
-   NOTE: Look for lines like this
-
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
-    Feel free to delete them once you know what you're doing, but they should serve as a guide
-    for when you are first encountering a few different constructs in your Neovim config.
-
-If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now! :)
---]]
-
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -92,6 +6,11 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+
+-- Fold level
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 -- Performance optimizations
 vim.o.lazyredraw = false -- Keep false for smooth scrolling in modern Neovim
@@ -778,7 +697,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = {}
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
         else
@@ -790,11 +709,17 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        c = { 'clang-format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+      formatters = {
+        ['clang-format'] = {
+          prepend_args = { '-style={BreakBeforeBraces: Allman, IndentWidth: 4}' },
+        },
       },
     },
   },
@@ -869,6 +794,7 @@ require('lazy').setup({
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono',
+        -- use_nvim_cmp_as_default = true,
       },
 
       completion = {
@@ -877,10 +803,10 @@ require('lazy').setup({
         documentation = {
           auto_show = false,
           auto_show_delay_ms = 500,
-          window = { border = 'rounded' },
+          -- window = { border = 'rounded' },
         },
         menu = {
-          border = 'rounded',
+          -- border = 'rounded',
           draw = {
             columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
           },
@@ -908,32 +834,13 @@ require('lazy').setup({
       -- Shows a signature help window while you type arguments for a function
       signature = {
         enabled = true,
-        window = { border = 'rounded' },
+        -- window = { border = 'rounded' },
       },
     },
   },
 
-  -- { -- You can easily change to a different colorscheme.
-  --   -- Change the name of the colorscheme plugin below, and then
-  --   -- change the command in the config to whatever the name of that colorscheme is.
-  --   --
-  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  --   'EdenEast/nightfox.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
-  --   config = function()
-  --     ---@diagnostic disable-next-line: missing-fields
-  --     require('nightfox').setup {
-  --       styles = {
-  --         comments = { italic = false }, -- Disable italics in comments
-  --       },
-  --     }
-  --
-  --     -- Load the colorscheme here.
-  --     -- Like many other themes, this one has different styles, and you could load
-  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --     -- vim.cmd.colorscheme 'carbonfox'
-  --   end,
-  -- },
+  dofile(vim.fn.expand '~/.config/current/theme/neovim.lua'),
+
   -- {
   --   'folke/tokyonight.nvim',
   --   priority = 999, -- Make sure to load this before all the other start plugins.
@@ -950,24 +857,37 @@ require('lazy').setup({
   --     }
   --
   --     -- Load the colorscheme here.
-  --     -- vim.cmd.colorscheme 'tokyonight-night'
+  --     vim.cmd.colorscheme 'tokyonight-night'
   --   end,
   -- },
 
-  {
-    'vague-theme/vague.nvim',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other plugins
-    config = function()
-      -- NOTE: you do not need to call setup if you don't want to.
-      require('vague').setup {
-        -- optional configuration here
-        sidebars = 'transparent',
-        floats = 'transparent',
-      }
-      vim.cmd.colorscheme 'vague'
-    end,
-  },
+  -- {
+  --   'vague-theme/vague.nvim',
+  --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other plugins
+  --   config = function()
+  --     -- NOTE: you do not need to call setup if you don't want to.
+  --     require('vague').setup {
+  --       -- optional configuration here
+  --       transparent = true,
+  --       -- sidebars = 'transparent',
+  --       -- floats = 'transparent',
+  --       on_highlights = function(hl, colors)
+  --         -- 1. Modify standard Neovim popup menu groups (affects blink.cmp and other popups)
+  --         hl.Pmenu = { bg = colors.inactiveBg, fg = colors.fg } -- Popup background
+  --         hl.PmenuSel = { bg = colors.line, fg = nil, bold = true } -- Selected item
+  --
+  --         -- 2. Modify blink.cmp specific groups directly
+  --         hl.BlinkCmpMenu = { bg = colors.bg } -- Blink menu background
+  --         hl.BlinkCmpMenuBorder = { fg = colors.floatBorder } -- Blink menu border
+  --         hl.BlinkCmpMenuSelection = { bg = colors.line } -- Blink specific selection
+  --         hl.BlinkCmpLabel = { fg = colors.fg } -- The text of the completion item
+  --         hl.BlinkCmpLabelMatch = { fg = colors.keyword, bold = true } -- The matching typed characters
+  --       end,
+  --     }
+  --     vim.cmd.colorscheme 'vague'
+  --   end,
+  -- },
 
   -- {
   --   'rose-pine/neovim',
@@ -1264,6 +1184,22 @@ cnoreabbrev Qall qall
 cnoreabbrev Wqa wqa
 cnoreabbrev WQa wqa
 cnoreabbrev WQA wqa
+cnoreabbrev q1 q!
 ]]
 
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+
+function leave_snippet()
+  if
+    ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+    and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+    and not require('luasnip').session.jump_active
+  then
+    require('luasnip').unlink_current()
+  end
+end
+
+-- stop snippets when you leave to normal mode
+vim.api.nvim_command [[
+    autocmd ModeChanged * lua leave_snippet()
+]]
