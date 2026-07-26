@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+THEME="${1:?usage: theme-set <name>}"
+THEMES_DIR="$HOME/.config/themes"
+CURRENT_DIR="$HOME/.config/current"
+SRC="$THEMES_DIR/$THEME"
+LINK="$CURRENT_DIR/theme"
+
+[ -d "$SRC" ] || { echo "theme '$THEME' not found in $THEMES_DIR" >&2; exit 1; }
+mkdir -p "$CURRENT_DIR"
+
+# 1. atomic symlink swap (ln -sf alone is NOT atomic)
+ln -sfn "$SRC" "$LINK.tmp"
+mv -T "$LINK.tmp" "$LINK"
+
+# 2. reload running daemons (tolerate any being absent)
+command -v hyprctl >/dev/null 2>&1 && hyprctl reload || true
+pkill -USR1  kitty  2>/dev/null || true
+pkill -SIGUSR2 waybar 2>/dev/null || true
+
+# 3. GTK / Kvantum
+[ -f "$LINK/gtk.sh" ] && sh "$LINK/gtk.sh" || true
+
+# 4. VSCode (only if jq present, file exists, and theme defines one)
+if [ -f "$LINK/vscode.json" ] && command -v jq >/dev/null 2>&1; then
+  VS="$HOME/.config/Code/User/settings.json"   # ⚠ VERIFY path (Codium/Flatpak/Insiders differ)
+  if [ -f "$VS" ]; then
+    name="$(jq -r '.themeName' "$LINK/vscode.json")"
+    tmp="$(mktemp)"
+    jq --arg t "$name" '.["workbench.colorTheme"] = $t' "$VS" > "$tmp" && mv "$tmp" "$VS"
+  fi
+fi
+
+# 5. record active theme
+echo "$THEME" > "$CURRENT_DIR/active-theme"

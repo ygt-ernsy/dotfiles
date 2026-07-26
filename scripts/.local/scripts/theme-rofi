@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+THEMES_DIR="$HOME/.config/themes"
+CURRENT="$(cat "$HOME/.config/current/active-theme" 2>/dev/null || true)"
+
+CHOICE="$(
+    for d in "$THEMES_DIR"/*/; do
+        name="$(basename "$d")"
+        if [[ "$name" == "$CURRENT" ]]; then
+            echo "● $name"
+        else
+            echo "  $name"
+        fi
+    done | rofi -dmenu -p "Theme" -i
+)"
+
+[[ -z "$CHOICE" ]] && exit 0
+
+# strip the marker prefix (handles both "● name" and "  name")
+THEME="${CHOICE#● }"
+THEME="${THEME#  }"
+
+"$HOME/.local/scripts/theme-set" "$THEME"
