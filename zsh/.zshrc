@@ -125,7 +125,7 @@ alias v="nvim"
 alias dprune="docker system prune -a --volumes"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /home/yigiterensoy/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -137,7 +137,7 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export GOPATH=$HOME/.go
 
 # Created by `pipx` on 2025-08-16 15:37:07
-export PATH="$PATH:/home/yigiterensoy/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.local/scripts:$PATH"
 
 # Load secrets if the file exists
