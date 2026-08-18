@@ -56,7 +56,7 @@ hl.on("hyprland.start", function()
 		"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 	)
 	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
-	hl.exec_cmd("systemctl --user start hyprland-session.target") -- this pulls up graphical-session.target
+	hl.exec_cmd("systemctl --user start hyprland-session.target")
 	hl.exec_cmd("lxqt-policykit-agent")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("dms run")
@@ -67,12 +67,12 @@ end)
 -----------------------
 hl.config({
 	general = {
-		gaps_in = 6,
-		gaps_out = 6,
-		border_size = 0,
+		gaps_in = 5,
+		gaps_out = 10,
+		border_size = 2,
 		col = {
-			active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-			inactive_border = "rgba(595959aa)",
+			active_border = { colors = { "rgba(89b4faee)", "rgba(313244aa)" }, angle = 45 },
+			inactive_border = "rgba(313244aa)",
 		},
 		resize_on_border = true,
 		allow_tearing = true,
@@ -86,7 +86,7 @@ hl.config({
 	decoration = {
 		-- rounding_power = 2.4,
 		-- rounding = 5,
-		rounding = 3,
+		rounding = 0,
 		blur = {
 			enabled = true,
 			xray = false,
