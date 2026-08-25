@@ -119,6 +119,7 @@ alias yeet="yay -Rcs"
 alias sybau="yay -Syu" # sudo pacman -Syu
 alias kys="shutdown now" # sudo pacman -Syu
 alias t="tmux a || tmux"
+alias iytevpn="sudo openconnect --protocol=gp vpn3.iyte.edu.tr"
 # eval "$(zoxide init zsh)"
 
 alias v="nvim"
@@ -135,6 +136,11 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # For the go directory
 export GOPATH=$HOME/.go
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Created by `pipx` on 2025-08-16 15:37:07
 export PATH="$PATH:$HOME/.local/bin"
