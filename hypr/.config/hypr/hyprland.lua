@@ -10,7 +10,7 @@ local hs = require("hyprsplit")
 ---------------------
 local terminal = "kitty"
 local fileManager = "dolphin"
-local menu = "rofi -show"
+local menu = "walker"
 
 local mainMod = "SUPER"
 local shiftMod = "SHIFT"
@@ -52,6 +52,7 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function()
+	hl.exec_cmd("walker --gapplication-service")
 	hl.exec_cmd(
 		"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 	)
@@ -59,7 +60,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("systemctl --user start hyprland-session.target")
 	hl.exec_cmd("lxqt-policykit-agent")
 	hl.exec_cmd("hypridle")
-	hl.exec_cmd("dms run")
+	hl.exec_cmd("waypaper --restore")
+	hl.exec_cmd("waybar")
 end)
 
 -----------------------
@@ -71,8 +73,8 @@ hl.config({
 		gaps_out = 10,
 		border_size = 2,
 		col = {
-			active_border = { colors = { "rgba(89b4faee)" }, angle = 45 },
-			inactive_border = "rgba(313244aa)",
+			active_border = { colors = { "rgba(33ccffee)" }, angle = 45 },
+			inactive_border = "rgba(595959aa)",
 		},
 		resize_on_border = true,
 		allow_tearing = true,
@@ -88,7 +90,7 @@ hl.config({
 		-- rounding = 5,
 		rounding = 0,
 		blur = {
-			enabled = true,
+			enabled = false,
 			xray = false,
 			special = false,
 			new_optimizations = true,
@@ -306,60 +308,6 @@ hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.move({ x = 50, y = 0, relative =
 hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.move({ x = 0, y = -50, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ x = 0, y = 50, relative = true }), { repeating = true })
 
----- Focus Mode ----
-hl.bind("SUPER + F1", function()
-	local focus_mode = (hl.get_config("animations.enabled") == false)
-
-	if focus_mode then
-		hl.exec_cmd("hyprctl reload")
-		return
-	end
-
-	hl.config({
-		general = {
-			gaps_in = 1,
-			gaps_out = 1,
-			border_size = 0,
-		},
-
-		animations = {
-			enabled = false, -- Disable animations
-		},
-
-		-- Disable blur, shadow and window rounding
-		decoration = {
-			shadow = { enabled = false },
-			blur = { enabled = false },
-			rounding = 0,
-		},
-	})
-end)
-
----- Toggle Terminal ----
-local term_tag = "toggleterm"
-local term_space = "toggleterm"
-local function toggleterm()
-	local windows = hl.get_windows()
-
-	for _, w in pairs(windows) do
-		for _, t in pairs(w.tags) do
-			if string.match(t, "^" .. term_tag) then
-				hl.dispatch(hl.dsp.workspace.toggle_special(term_space))
-				return
-			end
-		end
-	end
-
-	hl.exec_cmd(terminal, {
-		float = true,
-		workspace = "special:" .. term_space,
-		size = { "(monitor_w*0.6)", "(monitor_h*0.6)" },
-		tag = term_tag,
-	})
-end
-
-hl.bind(mainMod .. " + t", toggleterm)
-
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -397,6 +345,18 @@ hl.window_rule({
 hl.window_rule({
 	name = "matplotlib-floating",
 	match = { class = "^(Matplotlib)$" },
+	float = true,
+})
+
+hl.window_rule({
+	name = "waypaper-floating",
+	match = { class = "^(waypaper)$" },
+	float = true,
+})
+
+hl.window_rule({
+	name = "volume-floating",
+	match = { class = "^(org.pulseaudio.pavucontrol)$" },
 	float = true,
 })
 
