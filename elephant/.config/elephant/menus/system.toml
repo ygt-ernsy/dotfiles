@@ -1,0 +1,23 @@
+name = "system"
+name_pretty = "System"
+icon = "system-shutdown"
+
+[[entries]]
+text = "Lock"
+icon = "system-lock-screen"
+actions = { default = "hyprlock" }
+
+[[entries]]
+text = "Logout"
+icon = "system-log-out"
+actions = { default = "hyprctl dispatch exit" }
+
+[[entries]]
+text = "Reboot"
+icon = "system-reboot"
+actions = { default = "systemctl reboot" }
+
+[[entries]]
+text = "Shutdown"
+icon = "system-shutdown"
+actions = { default = "systemctl poweroff" }

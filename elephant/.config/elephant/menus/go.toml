@@ -1,0 +1,35 @@
+name = "go"
+name_pretty = "Go..."
+fixed_order = true
+
+[[entries]]
+text = "Apps"
+actions = { default = "walker -m desktopapplications" }
+
+[[entries]]
+text = "Clipboard"
+actions = { default = "walker -m clipboard" }
+
+[[entries]]
+text = "Theme"
+actions = { default = "setsid -f $HOME/.local/scripts/theme-walker" }
+
+[[entries]]
+text = "Wifi"
+actions = { default = "hyprctl dispatch 'hl.dsp.exec_cmd(\"[float] kitty nmtui\")'" }
+
+[[entries]]
+text = "Bluetooth"
+actions = { default = "walker -m bluetooth" }
+
+[[entries]]
+text = "Volume"
+actions = { default = "walker -m wireplumber" }
+
+[[entries]]
+text = "Power Profile"
+submenu = "power-profiles"
+
+[[entries]]
+text = "System"
+submenu = "system"
