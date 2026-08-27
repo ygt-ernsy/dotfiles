@@ -1,0 +1,132 @@
+@import url("../current/theme/waybar.css");
+
+* {
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @background;
+    color: @foreground;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    min-height: 0;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-image: none;
+    box-shadow: none;
+}
+
+/* --- workspaces --- */
+
+#workspaces {
+    margin: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 2px;
+    color: @color8;
+    background-color: transparent;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#workspaces button.active {
+    color: transparent;
+    background-color: @color4;
+    font-size: 0;
+    min-width: 16px;
+    padding: 0;
+    margin: 6px 4px;
+    border-radius: 2px;
+}
+
+#workspaces button:hover {
+    background-color: alpha(@foreground, 0.08);
+    color: @foreground;
+}
+
+/* --- clock --- */
+
+#clock {
+    padding: 0 12px;
+    font-weight: bold;
+    color: @foreground;
+}
+
+/* --- right-side status icons --- */
+
+#network,
+#bluetooth,
+#pulseaudio,
+#battery,
+#memory,
+#tray,
+#custom-power {
+    padding: 0 10px;
+    color: @foreground;
+}
+
+#custom-tray-toggle {
+    padding: 0 10px;
+    color: @foreground;
+}
+
+#custom-tray-toggle:hover {
+    color: @color4;
+}
+
+.tray-drawer {
+    padding: 0 4px;
+}
+
+#memory.warning {
+    color: @color3;
+}
+
+#memory.critical {
+    color: @color1;
+}
+
+#custom-power {
+    color: @color1;
+    margin-right: 6px;
+}
+
+#custom-power:hover {
+    color: @foreground;
+}
+
+#battery.warning {
+    color: @color3;
+}
+
+#battery.critical {
+    color: @color1;
+}
+
+#pulseaudio.muted {
+    color: @color8;
+}
+
+#tray > widget {
+    padding: 0 4px;
+}
+
+#tray menu {
+    background-color: @background;
+    color: @foreground;
+}
