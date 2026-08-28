@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+THEMES_DIR="$HOME/.config/themes"
+CURRENT="$(cat "$HOME/.config/current/active-theme" 2>/dev/null || true)"
+
+mapfile -t THEMES < <(for d in "$THEMES_DIR"/*/; do basename "$d"; done)
+
+CURRENT_IDX=-1
+for i in "${!THEMES[@]}"; do
+    [[ "${THEMES[$i]}" == "$CURRENT" ]] && CURRENT_IDX=$i
+done
+
+if (( CURRENT_IDX >= 0 )); then
+    CHOICE="$(printf '%s\n' "${THEMES[@]}" | walker -d -c "$CURRENT_IDX" -p "Theme")"
+else
+    CHOICE="$(printf '%s\n' "${THEMES[@]}" | walker -d -p "Theme")"
+fi
+
+[[ -z "$CHOICE" ]] && exit 0
+
+"$HOME/.local/scripts/theme-set" "$CHOICE"
