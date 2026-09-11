@@ -11,11 +11,6 @@
     "clock",
     "custom/separator",
     "custom/idle-indicator",
-    "custom/notification-silencing-indicator",
-    "custom/voxtype",
-    "custom/screenrecording-indicator",
-    "custom/update",
-    "custom/updatespacman",
     "tray",
     "custom/separator",
     "hyprland/workspaces"
