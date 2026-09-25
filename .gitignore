@@ -18,3 +18,5 @@ local.sh
 
 # dms 
 dms/
+
+lazy-lock.json
