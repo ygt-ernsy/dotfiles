@@ -47,12 +47,12 @@ hl.env("XCURSOR_SIZE", "12")
 hl.env("HYPRSHOT_DIR", home .. "/Pictures/Screenshots")
 hl.env("XDG_MENU_PREFIX", "arch-")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 -------------------
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function()
-	hl.exec_cmd("walker --gapplication-service")
 	hl.exec_cmd(
 		"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 	)
@@ -62,6 +62,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("waypaper --restore")
 	hl.exec_cmd("waybar")
+	hl.exec_cmd("walker --gapplication-service")
 end)
 
 -----------------------
@@ -69,9 +70,9 @@ end)
 -----------------------
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 10,
-		border_size = 2,
+		gaps_in = 2,
+		gaps_out = 4,
+		border_size = 0,
 		col = {
 			active_border = { colors = { "rgba(33ccffee)" }, angle = 45 },
 			inactive_border = "rgba(595959aa)",
@@ -109,7 +110,7 @@ hl.config({
 	},
 
 	animations = {
-		enabled = true,
+		enabled = false,
 	},
 
 	dwindle = {
@@ -285,7 +286,7 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 ------------------------
 ---- UTILITY BINDS ----
 ------------------------
-hl.bind("ALT + F4", hl.dsp.exec_cmd("dms ipc call lock lock"))
+hl.bind("ALT + F4", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + Tab", hl.dsp.window.cycle_next())
 
 hl.bind("ALT + Print", hl.dsp.exec_cmd("hyprshot -m window"))
