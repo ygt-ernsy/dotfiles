@@ -2,7 +2,7 @@
     accent: #88c0d0;
     cursor: #d8dee9;
     foreground: #d8dee9;
-    background: #2e3440;
+    background: #2e3440e6;
     selection-foreground: #d8dee9;
     selection-background: #434c5e;
 

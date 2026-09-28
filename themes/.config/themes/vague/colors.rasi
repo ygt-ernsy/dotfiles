@@ -1,5 +1,6 @@
 * {
-    background:           #141415;
+    accent:               #6e94b2;
+    background:           #141415e6;
     foreground:           #cdcdcd;
     cursor:               #cdcdcd;
     selection-background: #252530;

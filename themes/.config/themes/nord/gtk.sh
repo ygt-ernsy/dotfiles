@@ -6,6 +6,6 @@ if [ -z "${GSETTINGS_SCHEMA_DIR:-}" ] && [ -r /etc/set-environment ]; then
     export GSETTINGS_SCHEMA_DIR
 fi
 
-gsettings set org.gnome.desktop.interface gtk-theme    "Nordic-darker"
+gsettings set org.gnome.desktop.interface gtk-theme    "Nordic"
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 kvantummanager --set "Nordic-Darker-Solid"
