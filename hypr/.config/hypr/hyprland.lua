@@ -10,7 +10,7 @@ local hs = require("hyprsplit")
 ---------------------
 local terminal = "kitty"
 local fileManager = "dolphin"
-local menu = "walker"
+local menu = "rofi -show"
 
 local mainMod = "SUPER"
 local shiftMod = "SHIFT"
@@ -47,14 +47,14 @@ hl.env("XCURSOR_SIZE", "12")
 hl.env("HYPRSHOT_DIR", home .. "/Pictures/Screenshots")
 hl.env("XDG_MENU_PREFIX", "arch-")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
-hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
 -------------------
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function()
 	hl.exec_cmd(
-		"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
+		"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 	)
 	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
 	hl.exec_cmd("systemctl --user start hyprland-session.target")
@@ -62,7 +62,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("waypaper --restore")
 	hl.exec_cmd("waybar")
-	hl.exec_cmd("walker --gapplication-service")
+	hl.exec_cmd("wl-paste --watch cliphist store")
+	-- hl.exec_cmd("walker --gapplication-service")
 end)
 
 -----------------------
@@ -160,7 +161,7 @@ hl.config({
 		kb_options = "grp:ctrl_space_toggle,caps:escape",
 
 		repeat_rate = 50,
-		repeat_delay = 300,
+		repeat_delay = 250,
 
 		follow_mouse = 1,
 		accel_profile = "flat",
@@ -200,7 +201,15 @@ hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exit())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+
+-- rofi stuff
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
+hl.bind(
+	mainMod .. " + c",
+	hl.dsp.exec_cmd("cliphist list | rofi -dmenu -p 'Clipboard' -display-columns 2 | cliphist decode | wl-copy")
+) -- clipboard
+hl.bind("SUPER + SHIFT + space", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/scripts/theme-rofi")) -- themes
+
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + n", hl.dsp.layout("togglesplit"))
 
@@ -238,19 +247,11 @@ hl.bind("SUPER + period", hs.dsp.workspace.swap_monitors({ monitor1 = "current",
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- theme picker
-hl.bind("SUPER + SHIFT + space", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/scripts/theme-rofi"))
-------------------------
----- RESIZE SUBMAP ----
-------------------------
-hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
-hl.define_submap("resize", function()
-	hl.bind("l", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
-	hl.bind("h", hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
-	hl.bind("k", hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
-	hl.bind("j", hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
-	hl.bind("escape", hl.dsp.submap("reset"))
-end)
+---- RESIZE ----
+hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
 
 ----------------------
 ---- MEDIA BINDS ----
@@ -297,17 +298,8 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"))
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"))
 
 hl.bind(mainMod .. " + SHIFT + f", hl.dsp.window.fullscreen({ mode = "maximized" }))
--- hl.bind(mainMod .. " + t", hl.dsp.exec_cmd("kitty -e bpytop"))
 hl.bind(mainMod .. " + o", hl.dsp.exec_cmd("kitty -e nvim " .. configFile))
 hl.bind(mainMod .. " + g", hs.dsp.grab_rogue_windows())
-
-------------------------------
----- FLOATING WINDOW MOVE ----
-------------------------------
-hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.move({ x = -50, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.move({ x = 50, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.move({ x = 0, y = -50, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ x = 0, y = 50, relative = true }), { repeating = true })
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
