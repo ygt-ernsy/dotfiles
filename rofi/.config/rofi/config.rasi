@@ -181,4 +181,4 @@ configuration {
 */
 }
 
-@theme "~/.config/current/theme/rofi.rasi"
+@theme "~/.config/rofi/theme.rasi"

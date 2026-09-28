@@ -1,0 +1,85 @@
+@import "~/.config/current/theme/colors.rasi"
+
+* {
+    font: "JetBrainsMono Nerd Font 11";
+
+    bg0: @background;             /* Main window background */
+    bg1: @color0;                 /* Separator line color */
+    bg2: @selection-background;   /* Selection highlight */
+
+    fg0: @foreground;             /* Default text */
+    fg1: @accent;                 /* Selected / highlighted text */
+    fg2: @color8;                 /* Muted text for placeholder */
+
+    background-color:   transparent;
+    text-color:          @fg0;
+
+    margin:     0;
+    padding:    0;
+    spacing:    0;
+}
+
+window {
+    background-color:   @bg0;
+    location:            center;
+    width:                400px;
+    border-radius:        0px;
+}
+
+inputbar {
+    padding:    20px 24px;
+    spacing:    12px;
+    children:   [ entry ];
+}
+
+entry {
+    font:                inherit;
+    placeholder:         "Search";
+    placeholder-color:   @fg2;
+    vertical-align:      0.5;
+}
+
+message {
+    margin:              8px 12px 0px 12px;
+    padding:             10px 16px;
+    border-radius:       0px;
+    background-color:    rgba(255, 255, 255, 6%);
+    text-color:          @fg0;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    lines:      8;
+    columns:    1;
+
+    fixed-height:   false;
+    border:         1px 0 0;
+    padding:        8px 0px 16px 0px;
+}
+
+element {
+    padding:            12px 24px;
+    spacing:            16px;
+    background-color:   transparent;
+    text-color:          @fg0;
+}
+
+element selected normal, element selected active {
+    background-color:   @bg2;
+    text-color:          @fg1;
+    border-radius:       0px;
+    margin:              0px 12px;
+}
+
+element-icon {
+    size:            24px;
+    vertical-align:  0.5;
+}
+
+element-text {
+    text-color:      inherit;
+    vertical-align:  0.5;
+}
