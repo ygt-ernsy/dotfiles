@@ -152,14 +152,13 @@ return {
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+		for name, cfg in pairs(servers) do
+			vim.lsp.config(name, cfg)
+		end
+
 		require("mason-lspconfig").setup({
 			ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-			automatic_installation = false,
-			handlers = {
-				function(server_name)
-					vim.lsp.enable(server_name)
-				end,
-			},
+			automatic_enable = true, -- enables mason-installed servers via vim.lsp.enable()
 		})
 	end,
 }
