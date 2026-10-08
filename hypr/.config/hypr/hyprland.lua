@@ -57,7 +57,6 @@ hl.on("hyprland.start", function()
 		"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE"
 	)
 	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
-	hl.exec_cmd("systemctl --user start hyprland-session.target")
 	hl.exec_cmd("lxqt-policykit-agent")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("waypaper --restore")
