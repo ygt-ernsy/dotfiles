@@ -47,7 +47,6 @@ hl.env("XCURSOR_SIZE", "12")
 hl.env("HYPRSHOT_DIR", home .. "/Pictures/Screenshots")
 hl.env("XDG_MENU_PREFIX", "arch-")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
-hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
 -------------------
 ---- AUTOSTART ----
