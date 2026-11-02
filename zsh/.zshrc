@@ -23,13 +23,11 @@ alias v="nvim"
 alias dprune="docker system prune -a --volumes"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 export HYPRSHOT_DIR="$HOME/screenshots"
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export ELECTRON_OZONE_PLATFORM_HINT=auto
 
@@ -51,3 +49,6 @@ if [ -f "$HOME/.zshrc.secrets" ]; then
 fi
 
 eval "$(fnm env --use-on-cd)"
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
