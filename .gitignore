@@ -20,3 +20,6 @@ local.sh
 dms/
 
 lazy-lock.json
+zsh/.oh-my-zsh/
+zsh/.zsh-syntax-highlighting/
+zsh/.zsh/
