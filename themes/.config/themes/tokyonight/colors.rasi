@@ -4,7 +4,7 @@
     foreground: #a9b1d6;
     background: #1a1b26e6;
     selection-foreground: #c0caf5;
-    selection-background: #7aa2f7;
+    selection-background: #7aa2f7e1;
 
     color0: #32344a;
     color1: #f7768e;

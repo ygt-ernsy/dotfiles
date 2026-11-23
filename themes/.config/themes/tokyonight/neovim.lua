@@ -14,12 +14,12 @@ return {
 			},
 
 			-- 3. Specifically target the completion popup menu (Pmenu)
-			on_highlights = function(hl, c)
-				hl.Pmenu = { bg = "NONE" } -- Makes the completion menu background transparent
-				hl.PmenuSel = { bg = c.bg_visual } -- Keeps the highlight on the item you have selected
-				hl.NormalFloat = { bg = "NONE" } -- Ensures all other floats are fully transparent
-				hl.FloatBorder = { bg = "NONE" } -- Makes the borders of floating windows transparent
-			end,
+			-- on_highlights = function(hl, c)
+			-- 	hl.Pmenu = { bg = "NONE" } -- Makes the completion menu background transparent
+			-- 	hl.PmenuSel = { bg = c.bg_visual } -- Keeps the highlight on the item you have selected
+			-- 	hl.NormalFloat = { bg = "NONE" } -- Ensures all other floats are fully transparent
+			-- 	hl.FloatBorder = { bg = "NONE" } -- Makes the borders of floating windows transparent
+			-- end,
 		},
 		config = function(_, opts)
 			require("tokyonight").setup(opts)
